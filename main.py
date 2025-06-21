@@ -120,7 +120,7 @@ for param in model.classifier.parameters():
 num_ftrs = model.classifier[3].in_features
 model.classifier[3] = nn.Linear(num_ftrs, OUT_CLASSES)
 
-model_path = "best_model.pth"
+model_path = "./model/best_model.pth"
 device = torch.device("cpu") 
 model.load_state_dict(torch.load(model_path, map_location=device))
 model.to(device)
@@ -177,7 +177,3 @@ async def predict(file: UploadFile = File(...)):
         response["recommendation"] = recommendation
 
     return response
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
